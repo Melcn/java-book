@@ -1,5 +1,6 @@
 package Book;
 
+import java.util.Arrays;
 import java.util.Scanner;
 
 import livre.Livre;
@@ -13,6 +14,7 @@ public class Main {
 		Book books[] = new Book[3];
 		int choice = 0;
 		String enterTitle;
+		String newTitle;
 
 		books[0] = new Book(1, "Underground", "Haruki Murikami", 15);
 		books[1] = new Book(2, "L'alchimiste", "Paulo Coelho", 4);
@@ -39,6 +41,7 @@ public class Main {
 				addBook(book, books);
 				break;
 			}
+
 			case 2: {
 //read
 				System.out.println("Saisir le titre du Livre que vous recherchez svp");
@@ -47,10 +50,19 @@ public class Main {
 				System.out.println(read(enterTitle, books));
 				break;
 			}
+
 			case 3: {
 //update
+				System.out.println("Saisir le titre du livre que vous souhaitez modifier");
+				scan.nextLine();
+				enterTitle = scan.nextLine();
+				System.out.println("Entrez le nouveau titre");
+				newTitle = scan.nextLine();
+				update(enterTitle , books, newTitle);
+				System.out.println(Arrays.toString(books));
 				break;
 			}
+
 			case 4: {
 //delete
 				break;
@@ -107,5 +119,15 @@ public class Main {
 
 		}
 		return null;
+	}
+
+	public static void update(String title, Book bks[], String newTitle) {
+
+		for (int i = 0; i < bks.length; i++) {
+
+			if (bks[i] != null && bks[i].getTitle().equals(title)) {
+				bks[i].setTitle(newTitle);
+			}
+		}
 	}
 }
