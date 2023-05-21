@@ -12,6 +12,7 @@ public class Main {
 
 		Book books[] = new Book[3];
 		int choice = 0;
+		String enterTitle;
 
 		books[0] = new Book(1, "Underground", "Haruki Murikami", 15);
 		books[1] = new Book(2, "L'alchimiste", "Paulo Coelho", 4);
@@ -35,11 +36,15 @@ public class Main {
 				book.setAuthor(scan.nextLine());
 				System.out.println("Entrez un prix svp");
 				book.setPrice(scan.nextInt());
-				// ajouter(l, tab_livre);
+				addBook(book, books);
 				break;
 			}
 			case 2: {
 //read
+				System.out.println("Saisir le titre du Livre que vous recherchez svp");
+				scan.nextLine();
+				enterTitle = scan.nextLine();
+				System.out.println(read(enterTitle, books));
 				break;
 			}
 			case 3: {
@@ -89,5 +94,18 @@ public class Main {
 				}
 			}
 		}
+	}
+
+	public static Book read(String title, Book bks[]) {
+
+		for (int i = 0; i < bks.length; i++) {
+
+			if (bks[i] != null && bks[i].getTitle().equals(title)) {
+
+				return bks[i];
+			}
+
+		}
+		return null;
 	}
 }
