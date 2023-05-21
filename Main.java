@@ -3,8 +3,6 @@ package Book;
 import java.util.Arrays;
 import java.util.Scanner;
 
-import livre.Livre;
-
 public class Main {
 
 	public static void main(String[] args) {
@@ -25,10 +23,11 @@ public class Main {
 
 			showMenu();
 			choice = scan.nextInt();
+
 			switch (choice) {
 
-			case 1: {
-//create
+			case 1:
+
 				System.out.println("Entrez un id svp");
 				book.setId(scan.nextInt());
 				scan.nextLine();
@@ -40,36 +39,38 @@ public class Main {
 				book.setPrice(scan.nextInt());
 				addBook(book, books);
 				break;
-			}
 
-			case 2: {
-//read
+			case 2:
+
 				System.out.println("Saisir le titre du Livre que vous recherchez svp");
 				scan.nextLine();
 				enterTitle = scan.nextLine();
 				System.out.println(read(enterTitle, books));
 				break;
-			}
 
-			case 3: {
-//update
+			case 3:
+
 				System.out.println("Saisir le titre du livre que vous souhaitez modifier");
 				scan.nextLine();
 				enterTitle = scan.nextLine();
 				System.out.println("Entrez le nouveau titre");
 				newTitle = scan.nextLine();
-				update(enterTitle , books, newTitle);
+				update(enterTitle, books, newTitle);
+				System.out.println(Arrays.toString(books));
+				break;
+
+			case 4:
+
+				System.out.println("Saisir le titre du livre que vous sohaitez supprimer svp");
+				enterTitle = scan.next();
+				delete(enterTitle, books);
+				break;
+
+			case 5:
 				System.out.println(Arrays.toString(books));
 				break;
 			}
 
-			case 4: {
-//delete
-				break;
-			}
-			default:
-				throw new IllegalArgumentException("Unexpected value: " + choice);
-			}
 		} while (choice != 0);
 
 		scan.close();
@@ -127,6 +128,17 @@ public class Main {
 
 			if (bks[i] != null && bks[i].getTitle().equals(title)) {
 				bks[i].setTitle(newTitle);
+			}
+		}
+	}
+
+	public static void delete(String title, Book bks[]) {
+
+		for (int i = 0; i < bks.length; i++) {
+
+			if (bks[i] != null && bks[i].getTitle().equals(title)) {
+
+				bks[i] = null;
 			}
 		}
 	}
